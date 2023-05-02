@@ -39,7 +39,7 @@ while game:
     while True:
 
         choice_player_1 = choice_main()
-        choice_player_1_units_to_buy = choice_units_to_buy()
+
         if not 0 < choice_player_1 <= 5:
             print(f"{Fore.RED}Incorrect choice {Fore.BLUE}")
             print()
@@ -50,7 +50,7 @@ while game:
 
         elif choice_player_1 == 2:
             while True:
-
+                choice_player_1_units_to_buy = choice_units_to_buy()
                 if not 0 < choice_player_1_units_to_buy <= 5:
                     print(f"{Fore.RED}Incorrect choice {Fore.BLUE}")
                     print()

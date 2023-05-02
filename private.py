@@ -41,7 +41,7 @@ class Private():
                 continue
 
             if not 0 <= value_of_privates * 10 <= self.money:
-                print(f"{Fore.RED}not enough money or negative value {Fore.GREEN}")
+                print(f"{Fore.RED}not enough money or negative value {Fore.BLUE}")
                 print()
                 continue
 
@@ -74,7 +74,7 @@ class Private():
                     print()
                     continue
                 if not 0 <= value_of_privates <= self.money:
-                    print(f"{Fore.RED}not enough money or negative value {Fore.GREEN}")
+                    print(f"{Fore.RED}not enough money or negative value {Fore.BLUE}")
                     print()
                     continue
                 if value_of_privates == 0:
@@ -83,6 +83,7 @@ class Private():
                     self.money -= value_of_privates
                     self.dict["privates_level_1"] -= value_of_privates
                     self.dict["privates_level_2"] += value_of_privates
+                break
                 print()
 
     def training_level_2_privates(self):
@@ -103,7 +104,7 @@ class Private():
                     print()
                     continue
                 if not 0 <= value_of_privates <= self.money:
-                    print(f"{Fore.RED}not enough money or negative value {Fore.GREEN}")
+                    print(f"{Fore.RED}not enough money or negative value {Fore.BLUE}")
                     print()
                     continue
                 elif value_of_privates == 0:
@@ -132,7 +133,7 @@ class Private():
                     print()
                     continue
                 if not 0 <= value_of_privates <= self.money:
-                    print(f"{Fore.RED}not enough money or negative value {Fore.GREEN}")
+                    print(f"{Fore.RED}not enough money or negative value {Fore.BLUE}")
                     print()
                     continue
                 elif value_of_privates == 0:
@@ -161,7 +162,7 @@ class Private():
                     print()
                     continue
                 if not 0 <= value_of_privates <= self.money:
-                    print(f"{Fore.RED}not enough money or negative value {Fore.GREEN}")
+                    print(f"{Fore.RED}not enough money or negative value {Fore.BLUE}")
                     print()
                     continue
                 elif value_of_privates == 0:
