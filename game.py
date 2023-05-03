@@ -1,120 +1,259 @@
-from private import Private
+import random
+from colorama import init as colorama_init
 from colorama import Fore
+from colorama import Style
+from private import Private
+from corporal import Corporal
+from captain import Captain
+from major import Major
 
-player1_money = 1000
-player1_army = [Private(player1_money)]
+start_money = random.randint(10000, 15000)
+player_1_money = start_money
+player_2_money = start_money
 game = True
 
-
-def choice_main():
-    """The function allow to player choice first action"""
-    print()
-    print(f"{Fore.BLUE}Player 1")
-    print("Player 1 money", player1_money)
-    print("1 Check army")
-    print("2 Buy soldiers")
-    print("3 Training privates")
-    print("4 Attack enemy")
-    print("5 End turn")
-    choice_player_1 = int(input("Your choice: "))
-    return choice_player_1
-
-
-def choice_units_to_buy():
-    """The function allow to player buy units"""
-    print()
-    print(f"{Fore.BLUE}Player 1")
-    print("Player 1 money", player1_money)
-    print("1 Buy Privates")
-    print("2 Buy Corporals")
-    print("3 Captains")
-    print("4 Majors")
-    print("5 End turn")
-    choice_player_1 = int(input("Your choice: "))
-    return choice_player_1
-
+player1_army = [Private(), Corporal(), Captain(), Major()]
 
 while game:
 
-    while True:
-
-        choice_player_1 = choice_main()
-
-        if not 0 < choice_player_1 <= 5:
-            print(f"{Fore.RED}Incorrect choice {Fore.BLUE}")
-            print()
-
-        elif choice_player_1 == 1:
-            player1_army[0].display_all_privates()
-            print()
-
-        elif choice_player_1 == 2:
+    print()
+    print()
+    try:
+        print()
+        print()
+        print(f"{Fore.BLUE}Player 1")
+        print("Amount of money:", player_1_money)
+        print("1 Buy soldiers")
+        print("2 Level up units")
+        print("3 Attack enemy")
+        print("4 Army status")
+        choice = int(input("Choose action: "))
+        if choice == 1:
             while True:
-                choice_player_1_units_to_buy = choice_units_to_buy()
-                if not 0 < choice_player_1_units_to_buy <= 5:
-                    print(f"{Fore.RED}Incorrect choice {Fore.BLUE}")
+                try:
                     print()
-                elif choice_player_1_units_to_buy == 1:
-                    player1_army[0].buy_privates_level_1()
+                    print()
+                    print("Amount of money:", player_1_money)
+                    print("1 Buy privates")
+                    print("2 Buy corporals")
+                    print("3 Buy captains")
+                    print("4 Buy major")
+                    print("5 End turn")
+                    choice_buy = int(input("Choose action: "))
 
-                    print()
-                elif choice_player_1_units_to_buy == 2:
-                    print()
-                elif choice_player_1_units_to_buy == 3:
-                    print()
-                elif choice_player_1_units_to_buy == 4:
-                    print()
-                elif choice_player_1_units_to_buy == 5:
-                    print()
-                    break
-                print()
-            break
+                    if choice_buy == 1:
+                        while True:
+                            print()
+                            print()
+                            max_buy_cost = player_1_money // 10
+                            print("Amount of money:", player_1_money)
+                            print("max amount of privates to buy: ", max_buy_cost)
+                            buy_privates = int(input("enter amount of privates to buy: "))
 
-        elif choice_player_1 == 3:
+                            if buy_privates < 0 or buy_privates * 10 > player_1_money:
+                                print(f"{Fore.RED}incorrect value or not enough money to buy{Fore.BLUE}")
+                            else:
+                                player1_army[0].buy_privates(buy_privates)
+                                player_1_money -= buy_privates * 10
+                                print("Bought privates", buy_privates)
+                                break
+
+                    elif choice_buy == 2:
+                        while True:
+                            print()
+                            print()
+                            max_buy_cost = player_1_money // 20
+                            print("Amount of money:", player_1_money)
+                            print("max amount of corporals to buy: ", max_buy_cost)
+                            buy_corporals = int(input("enter amount of corporals to buy:"))
+
+                            if buy_corporals < 0 or buy_corporals * 20 > player_1_money:
+                                print(f"{Fore.RED}incorrect value or not enough money to buy{Fore.BLUE}")
+                            else:
+                                player1_army[1].buy_corporals(buy_corporals)
+                                player_1_money -= buy_corporals * 20
+                                print("Bought corporals", buy_corporals)
+                                break
+
+                    elif choice_buy == 3:
+                        while True:
+                            print()
+                            print()
+                            max_buy_cost = player_1_money // 30
+                            print("Amount of money:", player_1_money)
+                            print("max amount of captains to buy:", max_buy_cost)
+                            buy_captains = int(input("enter amount of captains to buy:"))
+
+                            if buy_captains < 0 or buy_captains * 30 > player_1_money:
+                                print(f"{Fore.RED}incorrect value or not enough money to buy{Fore.BLUE}")
+                            else:
+                                player1_army[2].buy_captains(buy_captains)
+                                player_1_money -= buy_captains * 30
+                                print("Bought captains", buy_captains)
+                                break
+
+                    elif choice_buy == 4:
+                        while True:
+                            print()
+                            print()
+                            max_buy_cost = player_1_money // 40
+                            print("Amount of money:", player_1_money)
+                            print("max amount of majors to buy:", max_buy_cost)
+                            buy_majors = int(input("enter amount of majors to buy:"))
+
+                            if buy_majors < 0 or buy_majors * 40 > player_1_money:
+                                print(f"{Fore.RED}incorrect value or not enough money to buy{Fore.BLUE}")
+                            else:
+                                player1_army[3].buy_majors(buy_majors)
+                                player_1_money -= buy_majors * 40
+                                print("Bought majors", buy_majors)
+                                break
+
+                    elif choice_buy == 5:
+                        break
+
+                except Exception as e:
+                    print(f"{Fore.RED}incorrect choice {e} {Fore.BLUE}")
+                    continue
+
+        elif choice == 2:
             while True:
-                choice_player_1
-
-                if not 0 < choice_player_1 <= 5:
-                    print(f"{Fore.RED}Incorrect choice {Fore.BLUE}")
+                try:
                     print()
+                    print("Amount of money:", player_1_money)
+                    print("1 Training privates")
+                    print("2 Training corporals")
+                    print("3 Training captains")
+                    print("4 Training major")
+                    print("5 End turn")
+                    choice_training = int(input("Choose unit to train"))
+                    if choice_training == 1:
+                        while True:
+                            print()
+                            print("Amount of money:", player_1_money)
+                            index = 1
+                            for _, j in player1_army[0].dict.items():
+                                print(f"{index} Training privates level {index}, amount: {j}")
+                                index += 1
+                            print("6 End training privates")
+                            choice_level_privates_to_training = int(input("Enter level of privates to training: "))
+                            if choice_level_privates_to_training == 1:
+                                print()
+                                print("Amount of money:", player_1_money)
+                                print("Max amount of privates to training:", player1_army[0].dict["privates_level_1"])
+                                print("Privates level 1 amount:", player1_army[0].dict["privates_level_1"])
+                                amount_of_privates_to_training = int(input("Enter amount of privates to training:"))
+                                if amount_of_privates_to_training < 0 or amount_of_privates_to_training > \
+                                        player1_army[0].dict[
+                                            "privates_level_1"] or amount_of_privates_to_training > player_1_money:
+                                    print(f"{Fore.RED}incorrect value or not enough money to buy{Fore.BLUE}")
+                                else:
+                                    player1_army[0].privates_promotion_level_1(amount_of_privates_to_training)
+                                    player_1_money -= amount_of_privates_to_training
+                            elif choice_level_privates_to_training == 2:
+                                print()
+                                print("Amount of money:", player_1_money)
+                                print("Max amount of privates to training:", player1_army[0].dict["privates_level_2"])
+                                print("Privates level 2 amount:", player1_army[0].dict["privates_level_2"])
+                                amount_of_privates_to_training = int(input("Enter amount of privates to training:"))
+                                if amount_of_privates_to_training < 0 or amount_of_privates_to_training > \
+                                        player1_army[0].dict[
+                                            "privates_level_2"] or amount_of_privates_to_training > player_1_money:
+                                    print(f"{Fore.RED}incorrect value or not enough money to buy{Fore.BLUE}")
+                                else:
+                                    player1_army[0].privates_promotion_level_2(amount_of_privates_to_training)
+                                    player_1_money -= amount_of_privates_to_training
+                            elif choice_level_privates_to_training == 3:
+                                print()
+                                print("Amount of money:", player_1_money)
+                                print("Max amount of privates to training:", player1_army[0].dict["privates_level_3"])
+                                print("Privates level 3 amount:", player1_army[0].dict["privates_level_3"])
+                                amount_of_privates_to_training = int(input("Enter amount of privates to training:"))
+                                if amount_of_privates_to_training < 0 or amount_of_privates_to_training > \
+                                        player1_army[0].dict[
+                                            "privates_level_3"] or amount_of_privates_to_training > player_1_money:
+                                    print(f"{Fore.RED}incorrect value or not enough money to buy{Fore.BLUE}")
+                                else:
+                                    player1_army[0].privates_promotion_level_3(amount_of_privates_to_training)
+                                    player_1_money -= amount_of_privates_to_training
+                            elif choice_level_privates_to_training == 4:
+                                print()
+                                print("Amount of money:", player_1_money)
+                                print("Max amount of privates to training:", player1_army[0].dict["privates_level_4"])
+                                print("Privates level 4 amount:", player1_army[0].dict["privates_level_4"])
+                                amount_of_privates_to_training = int(input("Enter amount of privates to training:"))
+                                if amount_of_privates_to_training < 0 or amount_of_privates_to_training > \
+                                        player1_army[0].dict[
+                                            "privates_level_4"] or amount_of_privates_to_training > player_1_money:
+                                    print(f"{Fore.RED}incorrect value or not enough money to buy{Fore.BLUE}")
+                                else:
+                                    player1_army[0].privates_promotion_level_4(amount_of_privates_to_training)
+                                    player_1_money -= amount_of_privates_to_training
+                            elif choice_level_privates_to_training == 5:
+                                print()
+                                print("Amount of money:", player_1_money)
+                                print("Max amount of privates to training:", player1_army[0].dict["privates_level_5"])
+                                print("Privates level 5 amount:", player1_army[0].dict["privates_level_5"])
+                                amount_of_privates_to_training = int(input("Enter amount of privates to training:"))
+                                if amount_of_privates_to_training < 0 or amount_of_privates_to_training > \
+                                        player1_army[0].dict[
+                                            "privates_level_5"] or amount_of_privates_to_training > player_1_money:
+                                    print(f"{Fore.RED}incorrect value or not enough money to buy{Fore.BLUE}")
+                                else:
+                                    player1_army[0].privates_promotion_level_5(amount_of_privates_to_training)
+                                    player1_army[1].corporal_promotion_from_privates(amount_of_privates_to_training)
+                                    player_1_money -= amount_of_privates_to_training
+                            elif choice_level_privates_to_training == 6:
+                                break
+                            else:
+                                print("Incorret value")
 
-                elif choice_player_1 == 1:
-                    choice_player_1
 
-                    if not 0 < choice_player_1 <= 5:
-                        print(f"{Fore.RED}Incorrect choice {Fore.BLUE}")
-                        print()
-                    elif choice_player_1 == 1:
-                        print()
-                    elif choice_player_1 == 2:
-                        print()
-                    elif choice_player_1 == 3:
-                        print()
-                    elif choice_player_1 == 4:
-                        print()
-                    elif choice_player_1 == 5:
-                        print()
 
-                elif choice_player_1 == 2:
-                    print()
-                elif choice_player_1 == 3:
-                    print()
-                elif choice_player_1 == 4:
-                    print()
-                elif choice_player_1 == 5:
-                    print()
-                    break
-                print()
+                    elif choice_training == 2:
+                        pass
+                    elif choice_training == 3:
+                        pass
+                    elif choice_training == 4:
+                        pass
+                    elif choice_training == 5:
+                        break
+                except Exception as e:
+                    print(f"{Fore.RED}incorrect choice {e} {Fore.BLUE}")
+                    continue
 
-            break
+        elif choice == 3:
+            print("attack enemy")
+
+        elif choice == 4:
             print()
-
-        elif choice_player_1 == 4:
-            show_army(player1_army)
+            print("Army:")
+            index = 1
+            for _, j in player1_army[0].dict.items():
+                print(f"Privates level {index}, amount: {j}")
+                index += 1
             print()
-
-        elif choice_player_1 == 5:
+            index = 1
+            for _, j in player1_army[1].dict.items():
+                print(f"Corporal level {index}, amount: {j}")
+                index += 1
             print()
-            break
+            index = 1
+            for _, j in player1_army[2].dict.items():
+                print(f"Captains level {index}, amount: {j}")
+                index += 1
+            print()
+            index = 1
+            for _, j in player1_army[3].dict.items():
+                print(f"Majors level {index}, amount: {j}")
+                index += 1
+            army_strenght = player1_army[0].all_privates_strength() + player1_army[1].all_corporals_strength() + \
+                            player1_army[2].all_captains_strength() + player1_army[3].all_majors_strength()
+            print("Army strength", army_strenght)
+            continue
+    except Exception as e:
+        print(f"{Fore.RED}incorrect choice {e} {Fore.BLUE}")
+        continue
 
-    print("break")
+    print("ddasdasdsadsasda")
+    x = input("fdsdfsdfsdfs: ")
