@@ -1,7 +1,7 @@
 from colorama import Fore
 
 
-class Private():
+class Captain():
     """Class to create captains soldiers"""
 
     def __init__(self, money=0, dict=None):
