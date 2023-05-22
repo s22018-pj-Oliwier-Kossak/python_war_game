@@ -19,6 +19,10 @@ player2_army = [Private(), Corporal(), Captain(), Major()]
 while game:
 
     while True:
+        army_strenght = player1_army[0].all_privates_strength() + player1_army[1].all_corporals_strength() + \
+                        player1_army[2].all_captains_strength() + player1_army[3].all_majors_strength()
+        army_strenght2 = player2_army[0].all_privates_strength() + player2_army[1].all_corporals_strength() + \
+                         player2_army[2].all_captains_strength() + player2_army[3].all_majors_strength()
         print()
         print()
         try:
@@ -475,8 +479,31 @@ while game:
                 break
 
 
+
             elif choice == 3:
-                print("attack enemy")
+
+                if army_strenght > army_strenght2:
+
+                    print("player 1 win")
+                    player2_army[0].privates_downgread()
+                    player2_army[1].corporals_downgread()
+                    player2_army[2].captains_downgread()
+                    player2_army[3].majors_downgread()
+                    player_1_money += player_2_money // 10
+                    player_2_money -= player_2_money // 10
+
+                elif army_strenght < army_strenght2:
+                    print("player 2 win")
+                    player1_army[0].privates_downgread()
+                    player1_army[1].corporals_downgread()
+                    player1_army[2].captains_downgread()
+                    player1_army[3].majors_downgread()
+                    player_2_money += player_1_money // 10
+                    player_1_money -= player_1_money // 10
+
+                else:
+                    print("remis")
+                break
 
             elif choice == 4:
                 print()
@@ -510,6 +537,10 @@ while game:
 
     # PLAYER 2
     while True:
+        army_strenght = player1_army[0].all_privates_strength() + player1_army[1].all_corporals_strength() + \
+                        player1_army[2].all_captains_strength() + player1_army[3].all_majors_strength()
+        army_strenght2 = player2_army[0].all_privates_strength() + player2_army[1].all_corporals_strength() + \
+                         player2_army[2].all_captains_strength() + player2_army[3].all_majors_strength()
         print()
         print()
         try:
@@ -965,8 +996,30 @@ while game:
                         continue
 
 
+
             elif choice == 3:
-                print("attack enemy")
+                if army_strenght > army_strenght2:
+
+                    print("player 1 win")
+                    player2_army[0].privates_downgread()
+                    player2_army[1].corporals_downgread()
+                    player2_army[2].captains_downgread()
+                    player2_army[3].majors_downgread()
+                    player_1_money += player_2_money // 10
+                    player_2_money -= player_2_money // 10
+
+                elif army_strenght < army_strenght2:
+                    print("player 2 win")
+                    player1_army[0].privates_downgread()
+                    player1_army[1].corporals_downgread()
+                    player1_army[2].captains_downgread()
+                    player1_army[3].majors_downgread()
+                    player_2_money += player_1_money // 10
+                    player_1_money -= player_1_money // 10
+
+                else:
+                    print("remis")
+                break
 
             elif choice == 4:
                 print()
@@ -990,9 +1043,9 @@ while game:
                 for _, j in player2_army[3].dict.items():
                     print(f"Majors level {index}, amount: {j}")
                     index += 1
-                army_strenght = player2_army[0].all_privates_strength() + player2_army[1].all_corporals_strength() + \
-                                player2_army[2].all_captains_strength() + player2_army[3].all_majors_strength()
-                print("Army strength:", army_strenght)
+                army_strenght2 = player2_army[0].all_privates_strength() + player2_army[1].all_corporals_strength() + \
+                                 player2_army[2].all_captains_strength() + player2_army[3].all_majors_strength()
+                print("Army strength:", army_strenght2)
                 continue
         except Exception as e:
             print(f"{Fore.RED}incorrect choice {e} {Fore.MAGENTA}")
